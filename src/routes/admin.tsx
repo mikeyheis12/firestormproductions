@@ -25,6 +25,7 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 function AdminPage() {
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const [quotes, setQuotes] = useState<QuoteLead[]>([]);
   const [filterType, setFilterType] = useState('All');
   const [filterStatus, setFilterStatus] = useState('All');
