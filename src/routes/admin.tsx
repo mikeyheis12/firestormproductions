@@ -1,10 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, ChevronDown, ChevronUp, Users, DollarSign, Clock } from 'lucide-react';
+import { Search, ChevronDown, ChevronUp, Users, DollarSign, Clock, ShieldAlert } from 'lucide-react';
 import Header from '../components/Header';
 import { getAllQuotes, updateQuoteStatus, type QuoteLead } from '../lib/quote-store';
 import { formatINR } from '../lib/estimate-engine';
+import { useAuth } from '../hooks/use-auth';
 
 export const Route = createFileRoute('/admin')({
   head: () => ({
@@ -24,6 +25,7 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 function AdminPage() {
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const [quotes, setQuotes] = useState<QuoteLead[]>([]);
   const [filterType, setFilterType] = useState('All');
   const [filterStatus, setFilterStatus] = useState('All');
@@ -31,6 +33,29 @@ function AdminPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
 
   useEffect(() => { setQuotes(getAllQuotes()); }, []);
+
+  if (authLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Header />
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!user || !isAdmin) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Header />
+        <div className="text-center">
+          <ShieldAlert className="mx-auto mb-4 h-12 w-12 text-destructive" />
+          <h1 className="text-2xl font-bold text-foreground">Access Denied</h1>
+          <p className="mt-2 text-sm text-muted-foreground">You need admin privileges to view this page.</p>
+          <Link to="/login" className="mt-4 inline-block text-sm text-primary underline">Sign in</Link>
+        </div>
+      </div>
+    );
+  }
 
   const filtered = quotes.filter(q => {
     if (filterType !== 'All' && q.formData.projectType !== filterType) return false;
