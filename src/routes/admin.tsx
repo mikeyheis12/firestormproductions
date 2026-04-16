@@ -34,6 +34,29 @@ function AdminPage() {
 
   useEffect(() => { setQuotes(getAllQuotes()); }, []);
 
+  if (authLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Header />
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!user || !isAdmin) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Header />
+        <div className="text-center">
+          <ShieldAlert className="mx-auto mb-4 h-12 w-12 text-destructive" />
+          <h1 className="text-2xl font-bold text-foreground">Access Denied</h1>
+          <p className="mt-2 text-sm text-muted-foreground">You need admin privileges to view this page.</p>
+          <Link to="/login" className="mt-4 inline-block text-sm text-primary underline">Sign in</Link>
+        </div>
+      </div>
+    );
+  }
+
   const filtered = quotes.filter(q => {
     if (filterType !== 'All' && q.formData.projectType !== filterType) return false;
     if (filterStatus !== 'All' && q.status !== filterStatus) return false;
