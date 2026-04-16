@@ -1,5 +1,5 @@
 import { Link, useLocation } from '@tanstack/react-router';
-import { Film, Menu, X } from 'lucide-react';
+import { Flame, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,9 +12,9 @@ export default function Header() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${isHome ? 'bg-transparent' : 'glass-card'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-2.5">
-          <Film className="h-7 w-7 text-primary" />
+          <Flame className="h-7 w-7 text-primary" />
           <span className="text-lg font-bold tracking-tight text-foreground">
-            VION<span className="text-primary">.</span>
+            FIRESTORM<span className="text-primary">.</span>
           </span>
         </Link>
 
