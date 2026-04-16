@@ -10,7 +10,7 @@ import { saveQuote } from '../lib/quote-store';
 export const Route = createFileRoute('/quote')({
   head: () => ({
     meta: [
-      { title: 'Get a Quote — Vion Production' },
+      { title: 'Get a Quote — Firestorm Production' },
       { name: 'description', content: 'Fill out our quick form and get an instant production estimate.' },
     ],
   }),

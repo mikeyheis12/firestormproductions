@@ -11,8 +11,8 @@ export const Route = createFileRoute('/results')({
   }),
   head: () => ({
     meta: [
-      { title: 'Your Estimate — Vion Production' },
-      { name: 'description', content: 'View your personalized production estimate from Vion.' },
+      { title: 'Your Estimate — Firestorm Production' },
+      { name: 'description', content: 'View your personalized production estimate from Firestorm.' },
     ],
   }),
   component: ResultsPage,

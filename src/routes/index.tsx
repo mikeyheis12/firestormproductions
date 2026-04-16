@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
-import { Play, ArrowRight, Camera, Palette, Sparkles } from 'lucide-react';
+import { Flame, ArrowRight, Camera, Palette, Sparkles } from 'lucide-react';
 import Header from '../components/Header';
 
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'Vion Production — Instant Production Estimates' },
-      { name: 'description', content: 'Plan your production and get an instant estimate from Vion Production house.' },
-      { property: 'og:title', content: 'Vion Production — Instant Production Estimates' },
+      { title: 'Firestorm Production — Instant Production Estimates' },
+      { name: 'description', content: 'Plan your production and get an instant estimate from Firestorm Production.' },
+      { property: 'og:title', content: 'Firestorm Production — Instant Production Estimates' },
       { property: 'og:description', content: 'Plan your production and get an instant estimate.' },
     ],
   }),
@@ -22,13 +22,13 @@ function LandingPage() {
 
       {/* Video BG overlay */}
       <div className="absolute inset-0 bg-gradient-dark" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,oklch(0.82_0.12_75_/_6%)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,oklch(0.72_0.19_35_/_8%)_0%,transparent_70%)]" />
 
       {/* Grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: 'linear-gradient(oklch(0.82 0.12 75 / 40%) 1px, transparent 1px), linear-gradient(90deg, oklch(0.82 0.12 75 / 40%) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(oklch(0.72 0.19 35 / 30%) 1px, transparent 1px), linear-gradient(90deg, oklch(0.72 0.19 35 / 30%) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
@@ -42,8 +42,8 @@ function LandingPage() {
             transition={{ duration: 0.8 }}
           >
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-1.5 text-xs tracking-widest text-gold-muted uppercase">
-              <Play className="h-3 w-3" />
-              Production Quote System
+              <Flame className="h-3 w-3" />
+              Firestorm Production
             </div>
           </motion.div>
 

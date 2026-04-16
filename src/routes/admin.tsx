@@ -9,7 +9,7 @@ import { formatINR } from '../lib/estimate-engine';
 export const Route = createFileRoute('/admin')({
   head: () => ({
     meta: [
-      { title: 'Admin Dashboard — Vion Production' },
+      { title: 'Admin Dashboard — Firestorm Production' },
       { name: 'description', content: 'Manage production leads and quotes.' },
     ],
   }),
