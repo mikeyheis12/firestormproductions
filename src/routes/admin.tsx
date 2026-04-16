@@ -1,10 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, ChevronDown, ChevronUp, Users, DollarSign, Clock } from 'lucide-react';
+import { Search, ChevronDown, ChevronUp, Users, DollarSign, Clock, ShieldAlert } from 'lucide-react';
 import Header from '../components/Header';
 import { getAllQuotes, updateQuoteStatus, type QuoteLead } from '../lib/quote-store';
 import { formatINR } from '../lib/estimate-engine';
+import { useAuth } from '../hooks/use-auth';
 
 export const Route = createFileRoute('/admin')({
   head: () => ({
