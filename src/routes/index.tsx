@@ -53,26 +53,17 @@ function LandingPage() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="text-4xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl"
           >
-            Plan Your Production.{' '}
-            <span className="text-gradient-gold">Get an Instant Estimate.</span>
+            Where drama meets dialogue, and{' '}
+            <span className="text-gradient-gold">stories speak fire.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground"
+            className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground"
           >
-            From concept to screen — tell us your vision and receive a transparent budget range in minutes, not days.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="mt-8 font-serif text-base italic text-gold-muted sm:text-lg"
-          >
-            "Where drama meets dialogue, and stories speak fire."
+            A production house built for bold ideas and unforgettable events.
           </motion.p>
 
           <motion.div
@@ -156,14 +147,10 @@ function LandingPage() {
             "If you can imagine it, we can produce it."
           </p>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mx-auto mt-24 max-w-3xl text-center"
-        >
+      </section>
+    </div>
+  );
+}
           <p className="font-serif text-2xl italic leading-snug text-foreground sm:text-3xl">
             "Where drama meets dialogue, and stories speak fire."
           </p>
