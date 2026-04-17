@@ -6,10 +6,10 @@ import Header from '../components/Header';
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'Firestorm Production — Instant Production Estimates' },
-      { name: 'description', content: 'Plan your production and get an instant estimate from Firestorm Production.' },
-      { property: 'og:title', content: 'Firestorm Production — Instant Production Estimates' },
-      { property: 'og:description', content: 'Plan your production and get an instant estimate.' },
+      { title: 'Firestorm Production — Events & Creative Production' },
+      { name: 'description', content: 'Firestorm Production creates unforgettable events, visuals, edits, and creative experiences.' },
+      { property: 'og:title', content: 'Firestorm Production — Events & Creative Production' },
+      { property: 'og:description', content: 'Firestorm Production creates unforgettable events, visuals, edits, and creative experiences.' },
     ],
   }),
   component: LandingPage,
