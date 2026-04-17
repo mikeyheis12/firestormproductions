@@ -66,6 +66,15 @@ function LandingPage() {
             From concept to screen — tell us your vision and receive a transparent budget range in minutes, not days.
           </motion.p>
 
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="mt-8 font-serif text-base italic text-gold-muted sm:text-lg"
+          >
+            "Where drama meets dialogue, and stories speak fire."
+          </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -105,6 +114,19 @@ function LandingPage() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mx-auto mt-24 max-w-3xl text-center"
+        >
+          <p className="font-serif text-2xl italic leading-snug text-foreground sm:text-3xl">
+            "Where drama meets dialogue, and stories speak fire."
+          </p>
+          <p className="mt-4 text-xs tracking-widest text-gold-muted uppercase">— Firestorm Production</p>
+        </motion.div>
       </section>
     </div>
   );
