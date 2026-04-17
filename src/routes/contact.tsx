@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
-import { Flame, Mail, Phone, MapPin, Camera, Linkedin as LinkedinIcon, Youtube as YoutubeIcon } from 'lucide-react';
+import { Flame, Mail, Phone, MapPin, Camera, Film, Music } from 'lucide-react';
 import Header from '../components/Header';
 
 export const Route = createFileRoute('/contact')({
@@ -70,7 +70,7 @@ function ContactPage() {
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           className="mx-auto mt-12 flex max-w-md items-center justify-center gap-6"
         >
-          {[Instagram, Linkedin, Youtube].map((Icon, i) => (
+          {[Camera, Film, Music].map((Icon, i) => (
             <a key={i} href="#" className="rounded-full border border-border p-3 text-muted-foreground transition-all hover:border-primary hover:text-primary">
               <Icon className="h-5 w-5" />
             </a>
