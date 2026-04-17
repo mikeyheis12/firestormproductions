@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
-import { Flame, Mail, Phone, MapPin, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Flame, Mail, Phone, MapPin, Camera, Linkedin as LinkedinIcon, Youtube as YoutubeIcon } from 'lucide-react';
 import Header from '../components/Header';
 
 export const Route = createFileRoute('/contact')({
