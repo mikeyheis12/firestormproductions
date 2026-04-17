@@ -22,7 +22,10 @@ export default function Header() {
 
         <nav className="hidden items-center gap-8 md:flex">
           <Link to="/" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Home</Link>
+          <Link to="/services" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Services</Link>
+          <Link to="/work" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Work</Link>
           <Link to="/about" className="text-sm text-muted-foreground transition-colors hover:text-foreground">About</Link>
+          <Link to="/contact" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Contact</Link>
           <Link to="/quote" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Get Quote</Link>
           {isAdmin && (
             <Link to="/admin" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Admin</Link>
@@ -53,7 +56,10 @@ export default function Header() {
           >
             <nav className="flex flex-col gap-4 px-6 py-6">
               <Link to="/" onClick={() => setOpen(false)} className="text-sm text-foreground">Home</Link>
+              <Link to="/services" onClick={() => setOpen(false)} className="text-sm text-foreground">Services</Link>
+              <Link to="/work" onClick={() => setOpen(false)} className="text-sm text-foreground">Work</Link>
               <Link to="/about" onClick={() => setOpen(false)} className="text-sm text-foreground">About</Link>
+              <Link to="/contact" onClick={() => setOpen(false)} className="text-sm text-foreground">Contact</Link>
               <Link to="/quote" onClick={() => setOpen(false)} className="text-sm text-foreground">Get Quote</Link>
               {isAdmin && (
                 <Link to="/admin" onClick={() => setOpen(false)} className="text-sm text-foreground">Admin</Link>
