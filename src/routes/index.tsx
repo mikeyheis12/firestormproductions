@@ -151,12 +151,3 @@ function LandingPage() {
     </div>
   );
 }
-          <p className="font-serif text-2xl italic leading-snug text-foreground sm:text-3xl">
-            "Where drama meets dialogue, and stories speak fire."
-          </p>
-          <p className="mt-4 text-xs tracking-widest text-gold-muted uppercase">— Firestorm Production</p>
-        </motion.div>
-      </section>
-    </div>
-  );
-}
