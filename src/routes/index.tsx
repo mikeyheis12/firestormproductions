@@ -115,6 +115,48 @@ function LandingPage() {
           ))}
         </div>
 
+        {/* What We Do */}
+        <div className="mx-auto mt-32 max-w-5xl">
+          <div className="mb-12 text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-1.5 text-xs tracking-widest text-gold-muted uppercase">
+              <Flame className="h-3 w-3" /> What We Do
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
+              Turning ideas into <span className="text-gradient-gold">unforgettable events.</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
+              From designing visuals to organising entire events, Firestorm Productions brings the heat.
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              'Event Organisation',
+              'Logistical Support',
+              'Financial Support',
+              'Socials Organisation',
+              'High-Quality Edits',
+              'Creative Designing',
+            ].map((s, i) => (
+              <motion.div
+                key={s}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="glass-card flex items-center gap-3 rounded-lg px-5 py-4"
+              >
+                <span className="text-lg">⚡</span>
+                <span className="text-sm font-medium text-foreground">{s}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          <p className="mt-10 text-center font-serif text-xl italic text-gold-muted sm:text-2xl">
+            "If you can imagine it, we can produce it."
+          </p>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
