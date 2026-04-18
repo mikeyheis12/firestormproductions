@@ -50,7 +50,7 @@ function ResultsPage() {
       .maybeSingle()
       .then(({ data }) => {
         if (data) {
-          const row = data as { id: string; form_data: QuoteFormData; estimate: Estimate };
+          const row = data as unknown as { id: string; form_data: QuoteFormData; estimate: Estimate };
           setLead({ id: row.id, formData: row.form_data, estimate: row.estimate });
         }
         setLoading(false);
