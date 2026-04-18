@@ -1,3 +1,4 @@
+import { supabase } from '@/integrations/supabase/client';
 import type { QuoteFormData, Estimate } from './estimate-engine';
 
 export interface QuoteLead {
@@ -8,35 +9,54 @@ export interface QuoteLead {
   createdAt: string;
 }
 
-const STORAGE_KEY = 'vion_quotes';
+interface QuoteLeadRow {
+  id: string;
+  form_data: QuoteFormData;
+  estimate: Estimate;
+  status: string;
+  created_at: string;
+}
 
-export function saveQuote(formData: QuoteFormData, estimate: Estimate): QuoteLead {
-  const lead: QuoteLead = {
-    id: crypto.randomUUID(),
-    formData,
-    estimate,
-    status: 'New',
-    createdAt: new Date().toISOString(),
+function rowToLead(row: QuoteLeadRow): QuoteLead {
+  return {
+    id: row.id,
+    formData: row.form_data,
+    estimate: row.estimate,
+    status: (row.status as QuoteLead['status']) ?? 'New',
+    createdAt: row.created_at,
   };
-  const existing = getAllQuotes();
-  existing.unshift(lead);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
-  return lead;
 }
 
-export function getAllQuotes(): QuoteLead[] {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  } catch {
-    return [];
+export async function saveQuote(formData: QuoteFormData, estimate: Estimate): Promise<QuoteLead> {
+  const { data, error } = await supabase
+    .from('quote_leads')
+    .insert({
+      form_data: formData as never,
+      estimate: estimate as never,
+      status: 'New',
+    })
+    .select()
+    .single();
+
+  if (error || !data) {
+    throw error ?? new Error('Failed to save quote');
   }
+  return rowToLead(data as unknown as QuoteLeadRow);
 }
 
-export function updateQuoteStatus(id: string, status: QuoteLead['status']): void {
-  const quotes = getAllQuotes();
-  const q = quotes.find(q => q.id === id);
-  if (q) {
-    q.status = status;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(quotes));
-  }
+export async function getAllQuotes(): Promise<QuoteLead[]> {
+  const { data, error } = await supabase
+    .from('quote_leads')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return ((data ?? []) as unknown as QuoteLeadRow[]).map(rowToLead);
+}
+
+export async function updateQuoteStatus(id: string, status: QuoteLead['status']): Promise<void> {
+  const { error } = await supabase
+    .from('quote_leads')
+    .update({ status })
+    .eq('id', id);
+  if (error) throw error;
 }
