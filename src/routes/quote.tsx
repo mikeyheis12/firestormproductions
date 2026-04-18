@@ -61,10 +61,20 @@ function QuotePage() {
     return true;
   };
 
-  const submit = () => {
-    const estimate = calculateEstimate(form);
-    const lead = saveQuote(form, estimate);
-    navigate({ to: '/results', search: { id: lead.id } });
+  const [submitting, setSubmitting] = useState(false);
+
+  const submit = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const estimate = calculateEstimate(form);
+      const lead = await saveQuote(form, estimate);
+      navigate({ to: '/results', search: { id: lead.id } });
+    } catch (err) {
+      console.error('Failed to save quote:', err);
+      alert('Something went wrong saving your quote. Please try again.');
+      setSubmitting(false);
+    }
   };
 
   return (

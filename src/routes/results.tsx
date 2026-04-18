@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Phone, FileText, ArrowLeft } from 'lucide-react';
 import Header from '../components/Header';
-import { getAllQuotes } from '../lib/quote-store';
+import { supabase } from '@/integrations/supabase/client';
+import type { QuoteFormData, Estimate } from '../lib/estimate-engine';
 import { formatINR } from '../lib/estimate-engine';
 
 export const Route = createFileRoute('/results')({
@@ -18,9 +20,51 @@ export const Route = createFileRoute('/results')({
   component: ResultsPage,
 });
 
+interface Lead {
+  id: string;
+  formData: QuoteFormData;
+  estimate: Estimate;
+}
+
 function ResultsPage() {
   const { id } = Route.useSearch();
-  const lead = getAllQuotes().find(q => q.id === id);
+  const [lead, setLead] = useState<Lead | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Public read isn't allowed, so we fetch via the form data we just submitted.
+    // Since RLS blocks SELECT for non-admins, we rely on sessionStorage as a one-shot cache.
+    const cached = sessionStorage.getItem(`quote_${id}`);
+    if (cached) {
+      try {
+        setLead(JSON.parse(cached));
+      } catch { /* ignore */ }
+      setLoading(false);
+      return;
+    }
+    // Try to fetch (works only if admin)
+    supabase
+      .from('quote_leads')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (data) {
+          const row = data as { id: string; form_data: QuoteFormData; estimate: Estimate };
+          setLead({ id: row.id, formData: row.form_data, estimate: row.estimate });
+        }
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Header />
+        <p className="text-muted-foreground">Loading your estimate...</p>
+      </div>
+    );
+  }
 
   if (!lead) {
     return (
@@ -72,7 +116,7 @@ function ResultsPage() {
         >
           <h2 className="mb-5 text-lg font-semibold text-foreground">What's Included</h2>
           <div className="space-y-3">
-            {estimate.breakdown.map((b, i) => (
+            {estimate.breakdown.map((b: Estimate['breakdown'][number], i: number) => (
               <div key={i} className="flex items-start gap-3">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 <div>
