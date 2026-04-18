@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      quote_leads: {
+        Row: {
+          created_at: string
+          estimate: Json
+          form_data: Json
+          id: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          estimate: Json
+          form_data: Json
+          id?: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          estimate?: Json
+          form_data?: Json
+          id?: string
+          status?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
