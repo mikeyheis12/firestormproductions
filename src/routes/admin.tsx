@@ -43,16 +43,23 @@ function AdminPage() {
     if (!isAdmin) return;
     setDataLoading(true);
     setError(null);
-    Promise.all([
-      getAllQuotes().catch(e => { console.error(e); return []; }),
-      listUsers().then(r => r.users).catch(e => { console.error(e); return []; }),
-    ])
-      .then(([q, u]) => {
+    (async () => {
+      try {
+        const { supabase } = await import('@/integrations/supabase/client');
+        const { data: { session } } = await supabase.auth.getSession();
+        const token = session?.access_token ?? '';
+        const [q, u] = await Promise.all([
+          getAllQuotes().catch(e => { console.error(e); return []; }),
+          listUsers({ data: { token } }).then(r => r.users).catch(e => { console.error(e); return []; }),
+        ]);
         setQuotes(q);
         setUsers(u);
-      })
-      .catch(e => setError(e instanceof Error ? e.message : String(e)))
-      .finally(() => setDataLoading(false));
+      } catch (e) {
+        setError(e instanceof Error ? e.message : String(e));
+      } finally {
+        setDataLoading(false);
+      }
+    })();
   }, [isAdmin]);
 
   if (authLoading) {
