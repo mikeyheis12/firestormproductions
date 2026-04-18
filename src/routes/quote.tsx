@@ -69,6 +69,9 @@ function QuotePage() {
     try {
       const estimate = calculateEstimate(form);
       const lead = await saveQuote(form, estimate);
+      sessionStorage.setItem(`quote_${lead.id}`, JSON.stringify({
+        id: lead.id, formData: lead.formData, estimate: lead.estimate,
+      }));
       navigate({ to: '/results', search: { id: lead.id } });
     } catch (err) {
       console.error('Failed to save quote:', err);
